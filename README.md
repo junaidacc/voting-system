@@ -1,20 +1,43 @@
-Online Voting System
-This is a web-based application designed to manage digital elections. It allows users to register, view candidates, and cast their votes securely while an admin manages the back-end data and results.
+# Online Voting System
+### Secure Election Management and Relational Data Architecture
 
-Technical Stack
-PHP: Used for the core logic and database communication.
+This project is a full-stack system designed to handle the complexities of digital balloting. Developed over a multi-phase engineering lifecycle, it focuses on data consistency, secure session management, and a structured relational database back-end.
 
-MySQL: Used for relational storage of users, candidates, and vote tallies.
+---
 
-CSS: Custom styling for the user interface and responsive forms.
+## 1. System Specifications and Requirements
+The following environment was used for development and testing to ensure system stability:
 
-Hack: Integrated for specific logic components within the project.
+| Component | Specification |
+| :--- | :--- |
+| **Language** | PHP 7.4+ (Core Logic) / Hack |
+| **Database** | MySQL 5.7 (Relational Storage) |
+| **Frontend** | HTML5, CSS3 (Responsive Design) |
+| **Local Server** | XAMPP / Apache Environment |
 
-Core Functionality
-Voter Registration: New users can create an account to participate in the election.
+---
 
-Security Logic: The system includes checks to ensure each authenticated user can only vote once.
+## 2. Database Schema Design
+A major portion of the engineering effort went into designing a relational schema that ensures integrity.
 
-Admin Panel: A dedicated section for managing the candidate list and monitoring live vote counts.
+| Table Name | Primary Key | Key Columns | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Users** | `user_id` | `username`, `password`, `status` | Stores encrypted voter credentials. |
+| **Candidates** | `candidate_id` | `name`, `party`, `total_votes` | Manages candidate profiles and counts. |
+| **Votes** | `vote_id` | `user_id`, `candidate_id` | Prevents double-voting via unique links. |
 
-Database Integration: Real-time updates to MySQL tables whenever a vote is successfully cast.
+---
+
+## 3. Key Engineering Features
+* **Session-State Persistence:** Uses server-side sessions to track voter progress.
+* **Atomic Transactions:** Logic ensures a vote is either fully recorded or not recorded at all.
+* **Input Sanitization:** Filters all user data to protect against SQL injection.
+
+---
+
+## 4. Local Installation
+1. Move the project folder into your `htdocs` directory.
+2. Create a new MySQL database in **phpMyAdmin**.
+3. Import the included `.sql` file to initialize the tables.
+4. Update `db_connect.php` with your local credentials.
+5. Access via `localhost/OnlineVotingSystem`.
